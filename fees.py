@@ -12,6 +12,7 @@ class fees:
         import math
         # print(self.delivery_distance)
         minimum_fee = 100
+
         # we just need math.ceil
         def round_up(n, decimals=0):
             multiplier = 10 ** decimals
@@ -52,11 +53,10 @@ class fees:
             print(1)
             return 1
 
-
     def delivery_fees(self, cart_value, delivery_distance, number_of_items, time_for_order):
         distance_delivery_fees = self.fees_for_distance()
         items_delivery_fees = self.fees_for_number_of_items(number_of_items)
-        friday_delivery_fees = self.fees_for_friday_rush_hours(time_for_order) # 1.1 or 1
+        friday_delivery_fees = self.fees_for_friday_rush_hours(time_for_order)  # 1.1 or 1
         print(f"friday_delivery_fees :{friday_delivery_fees}")
 
         surcharge = int(1000 - cart_value)
@@ -65,7 +65,7 @@ class fees:
 
         # 10000 cents are 100 Euros
         if cart_value >= 10000:
-            return "are zero because your cart value is equal or above to 100 Euros"
+            return 0
 
         # 100 cents is 1 Euro, 999 cents is 9.99 Euros
         # elif 100 <= cart_value <= 999:

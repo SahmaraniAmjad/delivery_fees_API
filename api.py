@@ -16,6 +16,10 @@ class Adder(Resource):
         delivery_distance = args['delivery_distance']
         number_of_items = args['number_of_items']
         time_for_order = args['time']
+        print(cart_value)
+        print(delivery_distance)
+        print(number_of_items)
+        print(time_for_order)
 
         if delivery_distance is None or cart_value is None or number_of_items is None or time_for_order is None:
             return jsonify("Invalid Parameter"), abort(400)
@@ -34,9 +38,13 @@ class Adder(Resource):
         db_utils = fees(cart_value, delivery_distance, number_of_items, time_for_order)
         # we are calling the fees method to calculate the delivery_fees
         cursor = db_utils.delivery_fees(cart_value, delivery_distance, number_of_items, time_for_order) # without surchage
+        print(cursor)
         # get day surcharge either 1 or 1.1
 
-        return jsonify("delivery_fees: " + str(cursor))
+        if cursor > 1500:
+            return jsonify(f"delivery_fee: {1500}")
+        else:
+            return jsonify(f"delivery_fee: {cursor}")
 
         '''cart_value = args.get("cart_value")
         delivery_distance = args.get("delivery_distance")
