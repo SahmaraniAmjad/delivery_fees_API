@@ -30,6 +30,7 @@ class Adder(Resource):
             except ValueError:
                 return abort(400, "String value is passed in one of the parameters or a float number")
 
+            # check time format is done in fees.py file
             time_for_order = str(args['time'])
 
             # we are calling here class fees
