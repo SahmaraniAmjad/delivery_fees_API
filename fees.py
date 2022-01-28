@@ -30,16 +30,7 @@ class fees:
             return surcharge * 50
 
     def fees_for_friday_rush_hours(self):
-        from datetime import datetime
-        from flask import abort
         import dateutil.parser as dp
-
-        # time format check
-        time_format = "%Y-%m-%dT%H:%M:%SZ"
-        try:
-            datetime.strptime(self.time_for_order, time_format)
-        except ValueError:
-            return abort(400, "Wrong time format")
 
         # ISO string  => convert to unix
         unix_timestamp = dp.parse(self.time_for_order)
@@ -51,8 +42,9 @@ class fees:
         minutes = unix_timestamp.minute
         # get the second number
         seconds = unix_timestamp.second
-        # get the weekday number
+        # get the weekday number of the current day
         day = date.today().weekday()
+        print(day)
 
         # friday rush hours check
         if day == 4 and 15 <= hours <= 18:

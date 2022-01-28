@@ -1,6 +1,7 @@
 from fees import fees
 from flask import Flask, request, jsonify, abort
 from flask_restful import Resource, Api
+from datetime import datetime as dt
 
 app = Flask("Delivery Fees")
 api = Api(app)
@@ -32,6 +33,11 @@ class Adder(Resource):
 
             # check time format is done in fees.py file
             time_for_order = str(args['time'])
+            time_format = "%Y-%m-%dT%H:%M:%SZ"
+            try:
+                dt.strptime(time_for_order, time_format)
+            except ValueError:
+                return abort(400, "Wrong time format")
 
             # we are calling here class fees
             db_utils = fees(cart_value, delivery_distance, number_of_items, time_for_order)
