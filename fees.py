@@ -22,10 +22,12 @@ class fees:
 
     def fees_for_number_of_items(self):
         # number of items check
+        surcharge = self.number_of_items - 4
         if 1 <= self.number_of_items <= 4:
             return 0
         else:
-            return (self.number_of_items - 4) * 50
+            # surcharge for additional items above 4 is calculated here
+            return surcharge * 50
 
     def fees_for_friday_rush_hours(self):
         from datetime import datetime
@@ -67,20 +69,20 @@ class fees:
 
         # I did not wrap it into int because it should be float
         surcharge = 1000 - self.cart_value
-        fees_with_surcharge = distance_delivery_fees + items_delivery_fees + surcharge
-        fees_without_surcharge = distance_delivery_fees + items_delivery_fees
+        # surcharge fees will be added on items delivery fees if items number > 4
+        final_fees = (distance_delivery_fees + items_delivery_fees) * hours_delivery_fees
 
         # 10000 cents are 100 Euros
         if self.cart_value >= 10000:
             return 0
-        # check if the care value is less than 1000 cents
+        # check if the cart value is less than 1000 cents
         elif self.cart_value < 1000:
             # I could round up the result using round() function to be able to get an integer value,
             # but in some calculation will affect the result.
-            return fees_with_surcharge * hours_delivery_fees
+            return final_fees + surcharge
 
-        # check if the care value is bigger than 1000 cents
+        # check if the cart value is bigger than 1000 cents
         elif self.cart_value >= 1000:
             # I could round up the result using round() function to be able to get an integer value,
             # but in some calculation will affect the result.
-            return fees_without_surcharge * hours_delivery_fees
+            return final_fees
