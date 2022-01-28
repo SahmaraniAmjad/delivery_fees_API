@@ -68,6 +68,7 @@ class fees:
         hours_delivery_fees = self.fees_for_friday_rush_hours()  # 1.1 or 1
 
         # I did not wrap it into int because it should be float
+        # surcharge of the carte value
         surcharge = 1000 - self.cart_value
         # surcharge fees will be added on items delivery fees if items number > 4
         final_fees = (distance_delivery_fees + items_delivery_fees) * hours_delivery_fees
