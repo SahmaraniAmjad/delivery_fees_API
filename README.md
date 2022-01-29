@@ -16,7 +16,7 @@ Project is created with:
 ## Setup
 ###### To run this project, you can use any IDE that supports python 
 ###### I have an additional file called Requirements.txt where you can find all the dependencies which you should download
-###### Using pycharm will automatically detect this file and offer you the option to download the dependencies
+###### Using pycharm will automatically detect Requirements.txt file and will offer you the option to directly start downloading the dependencies
 
 ```
 $ python3 api.py
