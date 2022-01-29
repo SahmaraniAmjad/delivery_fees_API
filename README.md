@@ -4,7 +4,7 @@
 * [Setup](#setup)
 
 ## General info
-This project is about creating an API to calculate the delivey fee under multiple conditio
+This project is about creating an API to calculate the delivey fee under multiple conditions
 	
 ## Technologies
 Project is created with:
